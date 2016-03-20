@@ -5,7 +5,7 @@ import time
 def download(url, dest, dp = None):
     if not dp:
         dp = xbmcgui.DialogProgress()
-        dp.create("WL Wizard","Downloading & Copying Files",' ', ' ')
+        dp.create("MiKodi Wizard","Downloading & Copying Files",' ', ' ')
     dp.update(0)
     start_time=time.time()
     urllib.urlretrieve(url, dest, lambda nb, bs, fs: _pbhook(nb, bs, fs, dp, start_time))
