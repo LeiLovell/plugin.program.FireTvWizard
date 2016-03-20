@@ -1,0 +1,11 @@
+2.0
+- Name Change
+
+1.1.0
+- Added Maintenance Options
+- Included Fresh Start
+- Code Cleaned
+- Whole GUI Redesign
+
+1.0.0
+- initial version release
