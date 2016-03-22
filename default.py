@@ -22,32 +22,33 @@ net = Net()
 U = ADDON.getSetting('User')
 FANART = xbmc.translatePath(os.path.join('special://home/addons/' + addon_id , 'fanart.jpg'))
 ICON = xbmc.translatePath(os.path.join('special://home/addons/' + addon_id, 'icon.png'))
-ART = xbmc.translatePath(os.path.join('special://home/addons/' + addon_id + '/resources/art/'))
+ART = xbmc.translatePath(os.path.join('special://home/addons/' + addon_id + '/resources/art/')) 
 VERSION = "0.0.1"
 DBPATH = xbmc.translatePath('special://database')
 TNPATH = xbmc.translatePath('special://thumbnails');
-PATH = "mikodi.uk"
-BASEURL = "http://mikodi.uk/downloads"
+PATH = "mikodi.uk"            
+BASEURL = "https://mikodi.uk/downloads"
+BASEURL1 = "https://mikodi.uk/downloads"
 H = 'http://'
-EXCLUDES     = ['plugin.video.mikodi.uk','script.module.addon.common',]
+EXCLUDES     = ['plugin.video.mikodi.uk','script.module.addon.common']
 
 def INDEX():
-    addDir('Update',BASEURL,2,ART+'icon.png',FANART,'fanart.jpg')
-    #addDir('Maintenance Tools',BASEURL,3,ART+'maintenance.png',FANART,'')
+    addDir('INSTALL BUILD',BASEURL,2,ART+'install.png',FANART,'')
+    addDir('MAINTENANCE',BASEURL,3,ART+'maintenance.png',FANART,'')
     setView('movies', 'MAIN')
 
 def BUILDMENU():
-    addDir('Build 1',BASEURL+'/backup.zip',5,ART+'icon.png',FANART,'fanart.jpg')
-    addDir('Build 2',BASEURL+'/sdbackup.zip',5,ART+'icon.png',FANART,'fanart.jpg')
+    addDir('Build 1',BASEURL+'/backup.zip',5,ART+'aio1.jpg',FANART,'')
+    setView('movies', 'MAIN')
+    addDir('Build 2',BASEURL1+'/sdbackup.zip',5,ART+'aio2.jpg',FANART,'')
+    setView('movies', 'MAIN')
+	
+def MAINTENANCE():
+    addDir('DELETE CACHE','url',4,ART+'deletecache.png',FANART,'')
+    addDir('FRESH START','url',6,ART+'freshstart.png',FANART,'')
+    addDir('DELETE PACKAGES','url',7,ART+'deletepackages.png',FANART,'')
     setView('movies', 'MAIN')
 
-#def MAINTENANCE():
-    #addDir('Update GuruTV',BASEURL+'/build/addon_data.zip',5,ART+'',FANART,'')
-    #addDir('Delete Cache','url',4,ART+'deletecache.png',FANART,'')
-    #addDir('iVue TV Guide Reset','url',11,ART+'reset.jpg',FANART,'')
-    #addDir('Fresh Start','url',6,ART+'freshstart.jpg',FANART,'')
-    #addDir('Delete Packages','url',7,ART+'deletepackages.jpg',FANART,'')
-    #setView('movies', 'MAIN')
 
 #################################
 ####### POPUP TEXT BOXES ########
@@ -70,45 +71,7 @@ def TextBoxes(heading,announce):
       self.win.getControl(self.CONTROL_TEXTBOX).setText(str(text))
       return
   TextBox()
-
-def facebook():
-    TextBoxes('')
-
-def donation():
-    TextBoxes('I allow anyone and everyone to use my build without ever charging. However I have had alot of users wish to donate and of course this is massively appreciated. If you too would like to donate my PayPal address is danielelmore@icloud.com')
-
-
-
-
-
-#################################
-### Delete iVue Database ########
-######THANKS_TECBOX##############
-
-def DELETEIVUEDB():
-    ivue_cache_path = os.path.join(xbmc.translatePath('special://profile/addon_data/script.tvguidetecbox/'), '')
-    if os.path.exists(ivue_cache_path)==True:
-        for root, dirs, files in os.walk(ivue_cache_path):
-            file_count = 0
-            file_count += len(files)
-
-        # Count files and give option to delete
-            if file_count > 0:
-
-                dialog = xbmcgui.Dialog()
-                if dialog.yesno("Delete IVUE database Files", str(file_count) + " files found", "Do you want to delete them?"):
-
-                    for f in files:
-                        os.unlink(os.path.join(root, f))
-                    for d in dirs:
-                        shutil.rmtree(os.path.join(root, d))
-
-            else:
-                pass
-
-
-    dialog = xbmcgui.Dialog()
-    dialog.ok("Maintenance", "Database Files Removed, Please reload TV Guide", "[COLOR yellow]Brought To You By White Label Wizard[/COLOR]")
+    
 
 #################################
 ####BUILD INSTALL################
@@ -117,7 +80,7 @@ def DELETEIVUEDB():
 def WIZARD(name,url,description):
     path = xbmc.translatePath(os.path.join('special://home/addons','packages'))
     dp = xbmcgui.DialogProgress()
-    dp.create("White Label Wizard","Downloading ",'', 'Please Wait')
+    dp.create("Updater","Downloading Your Build ",'', 'Please Wait')
     lib=os.path.join(path, name+'.zip')
     try:
        os.remove(lib)
@@ -126,13 +89,13 @@ def WIZARD(name,url,description):
     downloader.download(url, lib, dp)
     addonfolder = xbmc.translatePath(os.path.join('special://','home'))
     time.sleep(2)
-    dp.update(0,"", "Extracting Zip Please Wait")
+    dp.update(0,"", "Installing Your Build. Please Wait")
     print '======================================='
     print addonfolder
     print '======================================='
     extract.all(lib,addonfolder,dp)
     dialog = xbmcgui.Dialog()
-    dialog.ok("White Label Wizard", "To save changes you now need to force close Kodi, Press OK to force close Kodi")
+    dialog.ok("mikodi.uk", "To save changes you now need to force close Kodi, Press OK to force close Kodi")
     killxbmc()
 
 
@@ -144,47 +107,47 @@ def WIZARD(name,url,description):
 def DeletePackages(url):
     print '############################################################       DELETING PACKAGES             ###############################################################'
     packages_cache_path = xbmc.translatePath(os.path.join('special://home/addons/packages', ''))
-    try:
+    try:    
         for root, dirs, files in os.walk(packages_cache_path):
             file_count = 0
             file_count += len(files)
-
+            
         # Count files and give option to delete
             if file_count > 0:
-
+    
                 dialog = xbmcgui.Dialog()
                 if dialog.yesno("Delete Package Cache Files", str(file_count) + " files found", "Do you want to delete them?"):
-
+                            
                     for f in files:
                         os.unlink(os.path.join(root, f))
                     for d in dirs:
                         shutil.rmtree(os.path.join(root, d))
                     dialog = xbmcgui.Dialog()
-                    dialog.ok("White Label Wizard", "Packages Successfuly Removed", "[COLOR yellow]Brought To You By White Label Wizard[/COLOR]")
-    except:
+                    dialog.ok("mikodi.uk", "Packages Successfuly Removed", "[COLOR steelblue]Brought To You By LLovell[/COLOR]")
+    except: 
         dialog = xbmcgui.Dialog()
-        dialog.ok("White Label Wizard", "Sorry we were not able to remove Package Files", "[COLOR yellow]Brought To You By White Label Wizard[/COLOR]")
-
+        dialog.ok("mikodi.uk", "Sorry we were not able to remove Package Files", "[COLOR steelblue]Brought To You By LLovell[/COLOR]")
+    
 
 
 #################################
 ###DELETE CACHE##################
 ####THANKS GUYS @ XUNITY########
-
+	
 def deletecachefiles(url):
     print '############################################################       DELETING STANDARD CACHE             ###############################################################'
     xbmc_cache_path = os.path.join(xbmc.translatePath('special://home'), 'cache')
-    if os.path.exists(xbmc_cache_path)==True:
+    if os.path.exists(xbmc_cache_path)==True:    
         for root, dirs, files in os.walk(xbmc_cache_path):
             file_count = 0
             file_count += len(files)
-
+        
         # Count files and give option to delete
             if file_count > 0:
-
+    
                 dialog = xbmcgui.Dialog()
                 if dialog.yesno("Delete Cache Files", str(file_count) + " files found", "Do you want to delete them?"):
-
+                
                     for f in files:
                         try:
                             os.unlink(os.path.join(root, f))
@@ -195,181 +158,181 @@ def deletecachefiles(url):
                             shutil.rmtree(os.path.join(root, d))
                         except:
                             pass
-
+                        
             else:
                 pass
     if xbmc.getCondVisibility('system.platform.ATV2'):
         atv2_cache_a = os.path.join('/private/var/mobile/Library/Caches/AppleTV/Video/', 'Other')
-
+        
         for root, dirs, files in os.walk(atv2_cache_a):
             file_count = 0
             file_count += len(files)
-
+        
             if file_count > 0:
 
                 dialog = xbmcgui.Dialog()
                 if dialog.yesno("Delete ATV2 Cache Files", str(file_count) + " files found in 'Other'", "Do you want to delete them?"):
-
+                
                     for f in files:
                         os.unlink(os.path.join(root, f))
                     for d in dirs:
                         shutil.rmtree(os.path.join(root, d))
-
+                        
             else:
                 pass
         atv2_cache_b = os.path.join('/private/var/mobile/Library/Caches/AppleTV/Video/', 'LocalAndRental')
-
+        
         for root, dirs, files in os.walk(atv2_cache_b):
             file_count = 0
             file_count += len(files)
-
+        
             if file_count > 0:
 
                 dialog = xbmcgui.Dialog()
                 if dialog.yesno("Delete ATV2 Cache Files", str(file_count) + " files found in 'LocalAndRental'", "Do you want to delete them?"):
-
+                
                     for f in files:
                         os.unlink(os.path.join(root, f))
                     for d in dirs:
                         shutil.rmtree(os.path.join(root, d))
-
+                        
             else:
                 pass
               # Set path to Cydia Archives cache files
-
+                             
 
     # Set path to What th Furk cache files
     wtf_cache_path = os.path.join(xbmc.translatePath('special://profile/addon_data/plugin.video.whatthefurk/cache'), '')
-    if os.path.exists(wtf_cache_path)==True:
+    if os.path.exists(wtf_cache_path)==True:    
         for root, dirs, files in os.walk(wtf_cache_path):
             file_count = 0
             file_count += len(files)
-
+        
         # Count files and give option to delete
             if file_count > 0:
-
+    
                 dialog = xbmcgui.Dialog()
                 if dialog.yesno("Delete WTF Cache Files", str(file_count) + " files found", "Do you want to delete them?"):
-
+                
                     for f in files:
                         os.unlink(os.path.join(root, f))
                     for d in dirs:
                         shutil.rmtree(os.path.join(root, d))
-
+                        
             else:
                 pass
-
+                
                 # Set path to 4oD cache files
     channel4_cache_path= os.path.join(xbmc.translatePath('special://profile/addon_data/plugin.video.4od/cache'), '')
-    if os.path.exists(channel4_cache_path)==True:
+    if os.path.exists(channel4_cache_path)==True:    
         for root, dirs, files in os.walk(channel4_cache_path):
             file_count = 0
             file_count += len(files)
-
+        
         # Count files and give option to delete
             if file_count > 0:
-
+    
                 dialog = xbmcgui.Dialog()
                 if dialog.yesno("Delete 4oD Cache Files", str(file_count) + " files found", "Do you want to delete them?"):
-
+                
                     for f in files:
                         os.unlink(os.path.join(root, f))
                     for d in dirs:
                         shutil.rmtree(os.path.join(root, d))
-
+                        
             else:
                 pass
-
+                
                 # Set path to BBC iPlayer cache files
     iplayer_cache_path= os.path.join(xbmc.translatePath('special://profile/addon_data/plugin.video.iplayer/iplayer_http_cache'), '')
-    if os.path.exists(iplayer_cache_path)==True:
+    if os.path.exists(iplayer_cache_path)==True:    
         for root, dirs, files in os.walk(iplayer_cache_path):
             file_count = 0
             file_count += len(files)
-
+        
         # Count files and give option to delete
             if file_count > 0:
-
+    
                 dialog = xbmcgui.Dialog()
                 if dialog.yesno("Delete BBC iPlayer Cache Files", str(file_count) + " files found", "Do you want to delete them?"):
-
+                
                     for f in files:
                         os.unlink(os.path.join(root, f))
                     for d in dirs:
                         shutil.rmtree(os.path.join(root, d))
-
+                        
             else:
                 pass
-
-
+                
+                
                 # Set path to Simple Downloader cache files
     downloader_cache_path = os.path.join(xbmc.translatePath('special://profile/addon_data/script.module.simple.downloader'), '')
-    if os.path.exists(downloader_cache_path)==True:
+    if os.path.exists(downloader_cache_path)==True:    
         for root, dirs, files in os.walk(downloader_cache_path):
             file_count = 0
             file_count += len(files)
-
+        
         # Count files and give option to delete
             if file_count > 0:
-
+    
                 dialog = xbmcgui.Dialog()
                 if dialog.yesno("Delete Simple Downloader Cache Files", str(file_count) + " files found", "Do you want to delete them?"):
-
+                
                     for f in files:
                         os.unlink(os.path.join(root, f))
                     for d in dirs:
                         shutil.rmtree(os.path.join(root, d))
-
+                        
             else:
                 pass
-
+                
                 # Set path to ITV cache files
     itv_cache_path = os.path.join(xbmc.translatePath('special://profile/addon_data/plugin.video.itv/Images'), '')
-    if os.path.exists(itv_cache_path)==True:
+    if os.path.exists(itv_cache_path)==True:    
         for root, dirs, files in os.walk(itv_cache_path):
             file_count = 0
             file_count += len(files)
-
+        
         # Count files and give option to delete
             if file_count > 0:
-
+    
                 dialog = xbmcgui.Dialog()
                 if dialog.yesno("Delete ITV Cache Files", str(file_count) + " files found", "Do you want to delete them?"):
-
+                
                     for f in files:
                         os.unlink(os.path.join(root, f))
                     for d in dirs:
                         shutil.rmtree(os.path.join(root, d))
-
+                        
             else:
                 pass
-
+				
                 # Set path to temp cache files
     temp_cache_path = os.path.join(xbmc.translatePath('special://home/temp'), '')
-    if os.path.exists(temp_cache_path)==True:
+    if os.path.exists(temp_cache_path)==True:    
         for root, dirs, files in os.walk(temp_cache_path):
             file_count = 0
             file_count += len(files)
-
+        
         # Count files and give option to delete
             if file_count > 0:
-
+    
                 dialog = xbmcgui.Dialog()
                 if dialog.yesno("Delete TEMP dir Cache Files", str(file_count) + " files found", "Do you want to delete them?"):
-
+                
                     for f in files:
                         os.unlink(os.path.join(root, f))
                     for d in dirs:
                         shutil.rmtree(os.path.join(root, d))
-
+                        
             else:
                 pass
-
+				
 
     dialog = xbmcgui.Dialog()
-    dialog.ok("White Label Wizard", " All Cache Files Removed", "[COLOR yellow]Brought To You By White Label Wizard[/COLOR]")
-
-
+    dialog.ok("ARB Updater", " All Cache Files Removed", "[COLOR steelblue]Brought To You By ARB[/COLOR]")
+ 
+        
 def OPEN_URL(url):
     req = urllib2.Request(url)
     req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
@@ -408,7 +371,7 @@ def killxbmc():
         try: os.system('killall -9 kodi.bin')
         except: pass
         dialog.ok("[COLOR=red][B]WARNING  !!![/COLOR][/B]", "If you\'re seeing this message it means the force close", "was unsuccessful. Please force close XBMC/Kodi [COLOR=lime]DO NOT[/COLOR] exit cleanly via the menu.",'')
-    elif myplatform == 'android': # Android
+    elif myplatform == 'android': # Android  
         print "############   try android force close  #################"
         try: os.system('adb shell am force-stop org.xbmc.kodi')
         except: pass
@@ -417,8 +380,8 @@ def killxbmc():
         try: os.system('adb shell am force-stop org.xbmc.xbmc')
         except: pass
         try: os.system('adb shell am force-stop org.xbmc')
-        except: pass
-        dialog.ok("[COLOR=red][B]WARNING  !!![/COLOR][/B]", "Your system has been detected as Android, you ", "[COLOR=yellow][B]MUST[/COLOR][/B] force close XBMC/Kodi. [COLOR=lime]DO NOT[/COLOR] exit cleanly via the menu.","Pulling the power cable is the simplest method to force close.")
+        except: pass        
+        dialog.ok("[COLOR=yellow][B]TO COMPLETE ARB UPDATE[/COLOR][/B]", "Press the HOME button on your remote and [COLOR=red][B]FORCE STOP[/COLOR][/B] KODI via the Manage Installed Applications menu in settings on your Amazon home page then re-launch KODI")
     elif myplatform == 'windows': # Windows
         print "############   try windows force close  #################"
         try:
@@ -447,12 +410,12 @@ def killxbmc():
         except: pass
         try: os.system('sudo initctl stop xbmc')
         except: pass
-        dialog.ok("[COLOR=red][B]WARNING  !!![/COLOR][/B]", "If you\'re seeing this message it means the force close", "was unsuccessful. Please force close XBMC/Kodi [COLOR=lime]DO NOT[/COLOR] exit via the menu.","iOS detected.  Press and hold both the Sleep/Wake and Home button for at least 10 seconds, until you see the Apple logo.")
+        dialog.ok("[COLOR=red][B]WARNING  !!![/COLOR][/B]", "If you\'re seeing this message it means the force close", "was unsuccessful. Please force close XBMC/Kodi [COLOR=lime]DO NOT[/COLOR] exit via the menu.","iOS detected.  Press and hold both the Sleep/Wake and Home button for at least 10 seconds, until you see the Apple logo.")    
 
 ##########################
 ###DETERMINE PLATFORM#####
 ##########################
-
+        
 def platform():
     if xbmc.getCondVisibility('system.platform.android'):
         return 'android'
@@ -466,7 +429,7 @@ def platform():
         return 'atv2'
     elif xbmc.getCondVisibility('system.platform.ios'):
         return 'ios'
-
+    
 ############################
 ###FRESH START##############
 ####THANKS TO TVADDONS######
@@ -474,7 +437,7 @@ def platform():
 def FRESHSTART(params):
     plugintools.log("freshstart.main_list "+repr(params)); yes_pressed=plugintools.message_yes_no(AddonTitle,"Do you wish to restore your","Kodi configuration to default settings?")
     if yes_pressed:
-        addonPath=xbmcaddon.Addon(id=AddonID).getAddonInfo('path'); addonPath=xbmc.translatePath(addonPath);
+        addonPath=xbmcaddon.Addon(id=AddonID).getAddonInfo('path'); addonPath=xbmc.translatePath(addonPath); 
         xbmcPath=os.path.join(addonPath,"..",".."); xbmcPath=os.path.abspath(xbmcPath); plugintools.log("freshstart.main_list xbmcPath="+xbmcPath); failed=False
         try:
             for root, dirs, files in os.walk(xbmcPath,topdown=True):
@@ -489,14 +452,14 @@ def FRESHSTART(params):
                     except:
                         if name not in ["Database","userdata"]: failed=True
                         plugintools.log("Error removing "+root+" "+name)
-            if not failed: plugintools.log("freshstart.main_list All user files removed, you now have a clean install"); plugintools.message(AddonTitle,"The process is complete, you're now back to a fresh Kodi configuration with White Label Wizard!","Please reboot your system or restart Kodi in order for the changes to be applied.")
-            else: plugintools.log("freshstart.main_list User files partially removed"); plugintools.message(AddonTitle,"The process is complete, you're now back to a fresh Kodi configuration with White Label Wizard","Please reboot your system or restart Kodi in order for the changes to be applied.")
+            if not failed: plugintools.log("freshstart.main_list All user files removed, you now have a clean install"); plugintools.message(AddonTitle,"The process is complete, you're now back to a fresh Kodi configuration with ARB Updater!","Please reboot your system or restart Kodi in order for the changes to be applied.")
+            else: plugintools.log("freshstart.main_list User files partially removed"); plugintools.message(AddonTitle,"The process is complete, you're now back to a fresh Kodi configuration with ARB Updater","Please reboot your system or restart Kodi in order for the changes to be applied.")
         except: plugintools.message(AddonTitle,"Problem found","Your settings has not been changed"); import traceback; plugintools.log(traceback.format_exc()); plugintools.log("freshstart.main_list NOT removed")
         plugintools.add_item(action="",title="Now Exit Kodi",folder=False)
     else: plugintools.message(AddonTitle,"Your settings","has not been changed"); plugintools.add_item(action="",title="Done",folder=False)
 
-
-
+          
+        
 def get_params():
         param=[]
         paramstring=sys.argv[2]
@@ -512,7 +475,7 @@ def get_params():
                         splitparams=pairsofparams[i].split('=')
                         if (len(splitparams))==2:
                                 param[splitparams[0]]=splitparams[1]
-
+                                
         return param
 
 N = base64.decodestring('')
@@ -531,8 +494,8 @@ def addDir(name,url,mode,iconimage,fanart,description):
             ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
 
-
-
+        
+                      
 params=get_params()
 url=None
 name=None
@@ -554,20 +517,20 @@ try:
         iconimage=urllib.unquote_plus(params["iconimage"])
 except:
         pass
-try:
+try:        
         mode=int(params["mode"])
 except:
         pass
-try:
+try:        
         fanart=urllib.unquote_plus(params["fanart"])
 except:
         pass
-try:
+try:        
         description=urllib.unquote_plus(params["description"])
 except:
         pass
-
-
+        
+        
 print str(PATH)+': '+str(VERSION)
 print "Mode: "+str(mode)
 print "URL: "+str(url)
@@ -581,8 +544,8 @@ def setView(content, viewType):
         xbmcplugin.setContent(int(sys.argv[1]), content)
     if ADDON.getSetting('auto-view')=='true':
         xbmc.executebuiltin("Container.SetViewMode(%s)" % ADDON.getSetting(viewType) )
-
-
+        
+        
 if mode==None or url==None or len(url)<1:
         INDEX()
 
@@ -591,27 +554,27 @@ elif mode==2:
 
 elif mode==3:
         MAINTENANCE()
-
+		
 elif mode==4:
         deletecachefiles(url)
-
+		
 elif mode==5:
         WIZARD(name,url,description)
 
-elif mode==6:
+elif mode==6:        
 	FRESHSTART(params)
-
+	
 elif mode==7:
        DeletePackages(url)
 
 elif mode==8:
        facebook()
-
+       
 elif mode==9:
        donation()
 
 elif mode==11:
         DELETEIVUEDB()
 
-
+        
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
