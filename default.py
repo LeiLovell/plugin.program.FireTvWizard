@@ -92,7 +92,7 @@ def WIZARD(name,url,description):
     print '======================================='
     extract.all(lib,addonfolder,dp)
     dialog = xbmcgui.Dialog()
-    dialog.ok("Brought 2 You By Mikodi.uk", "To save changes you now need to force close Kodi, Press OK to force close Kodi")
+    dialog.ok("mikodi.uk", "To save changes you now need to force close Kodi, Press OK to force close Kodi")
     killxbmc()
 
 
