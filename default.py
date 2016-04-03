@@ -26,9 +26,8 @@ ART = xbmc.translatePath(os.path.join('special://home/addons/' + addon_id + '/re
 VERSION = "0.0.1"
 DBPATH = xbmc.translatePath('special://database')
 TNPATH = xbmc.translatePath('special://thumbnails');
-PATH = "mikodi.uk"            
-BASEURL = "https://mikodi.uk/downloads"
-BASEURL1 = "https://mikodi.uk/downloads"
+PATH = "mikodi.uk"         
+BASEURL = "https://www.dropbox.com/s/o9vvpmnrkss031l"
 H = 'http://'
 EXCLUDES     = ['plugin.video.mikodi.uk','script.module.addon.common']
 
@@ -38,16 +37,14 @@ def INDEX():
     setView('movies', 'MAIN')
 
 def BUILDMENU():
-    addDir('Build 1',BASEURL+'/backup.zip',5,ART+'aio1.jpg',FANART,'')
+    addDir('Build 1',BASEURL+'/ubackup.zip?dl=1',5,ART+'aio1.jpg',FANART,'')
     setView('movies', 'MAIN')
-    addDir('Build 2',BASEURL1+'/sdbackup.zip',5,ART+'aio2.jpg',FANART,'')
-    setView('movies', 'MAIN')
-	
-def MAINTENANCE():
-    addDir('DELETE CACHE','url',4,ART+'deletecache.png',FANART,'')
-    addDir('FRESH START','url',6,ART+'freshstart.png',FANART,'')
-    addDir('DELETE PACKAGES','url',7,ART+'deletepackages.png',FANART,'')
-    setView('movies', 'MAIN')
+    
+#def MAINTENANCE():
+ #   addDir('DELETE CACHE','url',4,ART+'deletecache.png',FANART,'')
+ #   addDir('FRESH START','url',6,ART+'freshstart.png',FANART,'')
+ #   addDir('DELETE PACKAGES','url',7,ART+'deletepackages.png',FANART,'')
+ #   setView('movies', 'MAIN')
 
 
 #################################
