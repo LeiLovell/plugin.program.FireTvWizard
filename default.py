@@ -32,12 +32,12 @@ H = 'http://'
 EXCLUDES     = ['plugin.video.mikodi.uk','script.module.addon.common']
 
 def INDEX():
-    addDir('INSTALL BUILD',BASEURL,2,ART+'install.png',FANART,'')
+    addDir('Update',BASEURL,2,ART+'install.png',FANART,'')
     #addDir('MAINTENANCE',BASEURL,3,ART+'maintenance.png',FANART,'')
     setView('movies', 'MAIN')
 
 def BUILDMENU():
-    addDir('Build 1',BASEURL+'/ubackup.zip?dl=1',5,ART+'aio1.jpg',FANART,'')
+    addDir('FireTv Build 01',BASEURL+'/ubackup.zip?dl=1',5,ART+'aio1.jpg',FANART,'')
     setView('movies', 'MAIN')
     
 #def MAINTENANCE():
