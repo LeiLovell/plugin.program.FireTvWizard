@@ -27,7 +27,7 @@ VERSION = "0.0.1"
 DBPATH = xbmc.translatePath('special://database')
 TNPATH = xbmc.translatePath('special://thumbnails');
 PATH = "mikodi.uk"         
-BASEURL = "https://www.dropbox.com/s/o9vvpmnrkss031l"
+BASEURL = "https://www.dropbox.com"
 H = 'http://'
 EXCLUDES     = ['plugin.video.mikodi.uk','script.module.addon.common']
 
@@ -37,7 +37,8 @@ def INDEX():
     setView('movies', 'MAIN')
 
 def BUILDMENU():
-    addDir('FireTv Build 01',BASEURL+'/ubackup.zip?dl=1',5,ART+'aio1.jpg',FANART,'')
+    addDir('FireTv Build 01',BASEURL+'/s/o9vvpmnrkss031l/ubackup.zip?dl=1',5,ART+'aio1.jpg',FANART,'')
+    #addDir('Another Build 02',BASEURL+'=1',5,ART+'aio1.jpg',FANART,'')
     setView('movies', 'MAIN')
     
 #def MAINTENANCE():
