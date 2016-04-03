@@ -5,7 +5,7 @@ import time
 def download(url, dest, dp = None):
     if not dp:
         dp = xbmcgui.DialogProgress()
-        dp.create("MiKodi Wizard","Downloading & Copying Files",' ', ' ')
+        dp.create("Wizard","Downloading & Copying Files",' ', ' ')
     dp.update(0)
     start_time=time.time()
     urllib.urlretrieve(url, dest, lambda nb, bs, fs: _pbhook(nb, bs, fs, dp, start_time))
@@ -24,7 +24,7 @@ def _pbhook(numblocks, blocksize, filesize, dp, start_time):
             mbs = '%.02f MB of %.02f MB' % (currently_downloaded, total)
             e = 'Speed: %.02f Kb/s ' % kbps_speed
             e += 'ETA: %02d:%02d' % divmod(eta, 60)
-            wookiestring = '[COLOR blue]Download is underway please standby.[/COLOR]'
+            wookiestring = '[COLOR blue]Please Standby...[/COLOR]'
             dp.update(percent, mbs, e,wookiestring)
         except:
             percent = 100
