@@ -33,7 +33,7 @@ EXCLUDES     = ['plugin.video.mikodi.uk','script.module.addon.common']
 
 def INDEX():
     addDir('INSTALL BUILD',BASEURL,2,ART+'install.png',FANART,'')
-    addDir('MAINTENANCE',BASEURL,3,ART+'maintenance.png',FANART,'')
+    #addDir('MAINTENANCE',BASEURL,3,ART+'maintenance.png',FANART,'')
     setView('movies', 'MAIN')
 
 def BUILDMENU():
@@ -86,13 +86,13 @@ def WIZARD(name,url,description):
     downloader.download(url, lib, dp)
     addonfolder = xbmc.translatePath(os.path.join('special://','home'))
     time.sleep(2)
-    dp.update(0,"", "Installing Your Build. Please Wait")
+    dp.update(0,"", "Installing FireTv Build. Please Wait")
     print '======================================='
     print addonfolder
     print '======================================='
     extract.all(lib,addonfolder,dp)
     dialog = xbmcgui.Dialog()
-    dialog.ok("mikodi.uk", "To save changes you now need to force close Kodi, Press OK to force close Kodi")
+    dialog.ok("brought to you by mikodi.uk", "To save changes you now need to force close Kodi, Press OK to force close Kodi")
     killxbmc()
 
 
