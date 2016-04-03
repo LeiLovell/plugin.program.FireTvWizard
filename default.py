@@ -77,7 +77,7 @@ def TextBoxes(heading,announce):
 def WIZARD(name,url,description):
     path = xbmc.translatePath(os.path.join('special://home/addons','packages'))
     dp = xbmcgui.DialogProgress()
-    dp.create("Updater","Downloading Your Build ",'', 'Please Wait')
+    dp.create("Downloading... Brought 2 You By Mikodi.uk","Downloading Your Build ",'', 'Please Wait')
     lib=os.path.join(path, name+'.zip')
     try:
        os.remove(lib)
