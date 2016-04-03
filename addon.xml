@@ -2,7 +2,7 @@
 <addon id="plugin.program.mikodi.uk" name="FireTv Wizard" version="1.1.1" provider-name="LLovell">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
-	<import addon="script.module.addon.common" optional="true" />
+	<import addon="script.module.addon.common"/>
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>program executable</provides>
