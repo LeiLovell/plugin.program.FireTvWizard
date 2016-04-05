@@ -9,13 +9,13 @@ import plugintools
 from addon.common.addon import Addon
 from addon.common.net import Net
 
-
+###THANK YOU TO THE PEOPLE THAT ORIGINALY WROTE SOME OF THIS CODE WITHOUT YOU I STILL PROBABLY WOULDNT HAVE A CLUE WHERE TO START###
 
 
 USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'
-addon_id = 'plugin.program.mikodi.uk'
+addon_id = 'plugin.video.mikodi.uk'
 ADDON = xbmcaddon.Addon(id=addon_id)
-AddonID='plugin.program.mikodi.uk'
+AddonID='plugin.video.mikodi.uk'
 AddonTitle="mikodi.uk"
 dialog       =  xbmcgui.Dialog()
 net = Net()
@@ -29,7 +29,7 @@ TNPATH = xbmc.translatePath('special://thumbnails');
 PATH = "mikodi.uk"         
 BASEURL = "https://www.dropbox.com"
 H = 'http://'
-EXCLUDES     = ['plugin.program.mikodi.uk','script.module.addon.common']
+EXCLUDES     = ['plugin.video.mikodi.uk','script.module.addon.common']
 
 def INDEX():
     addDir('Update',BASEURL,2,ART+'install.png',FANART,'')
