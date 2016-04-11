@@ -37,7 +37,7 @@ def INDEX():
     setView('movies', 'MAIN')
 
 def BUILDMENU():
-    addDir('FireTv Build 01',BASEURL+'https://www.dropbox.com/s/2th7qxa58mj3xux/build01.zip?dl=1',5,ART+'aio1.jpg',FANART,'')
+    addDir('FireTv Build 01',BASEURL+'/s/2th7qxa58mj3xux/build01.zip?dl=1',5,ART+'aio1.jpg',FANART,'')
     addDir('Backup Build 02',BASEURL+'/s/o9vvpmnrkss031l/ubackup.zip?dl=1',5,ART+'aio1.jpg',FANART,'')
     setView('movies', 'MAIN')
     
