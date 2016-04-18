@@ -379,7 +379,7 @@ def killxbmc():
         except: pass
         try: os.system('adb shell am force-stop org.xbmc')
         except: pass        
-        dialog.ok("[COLOR=yellow][B]TO COMPLETE ARB UPDATE[/COLOR][/B]", "Press the HOME button on your remote and [COLOR=red][B]FORCE STOP[/COLOR][/B] KODI via the Manage Installed Applications menu in settings on your Amazon home page then re-launch KODI")
+        dialog.ok("[B]TO COMPLETE THR UPDATE[/B]", "Press the HOME button on your remote then on your Amazon firetv home page goto : settings/ Applications/ Manage Installed Applications/ Kodi/ Force Close. Then re-launch KODI")
     elif myplatform == 'windows': # Windows
         print "############   try windows force close  #################"
         try:
