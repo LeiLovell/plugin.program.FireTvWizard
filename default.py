@@ -32,13 +32,14 @@ H = 'http://'
 EXCLUDES     = ['plugin.program.FireTvWizard','script.module.addon.common']
 
 def INDEX():
-    addDir('Update',BASEURL,2,ART+'install.png',FANART,'')
+    addDir('Update',BASEURL,2,ART+'',FANART,'')
     #addDir('MAINTENANCE',BASEURL,3,ART+'maintenance.png',FANART,'')
     setView('movies', 'MAIN')
 
 def BUILDMENU():
-    addDir('FireTv Build 01',BASEURL+'/s/2th7qxa58mj3xux/build01.zip?dl=1',5,ART+'aio1.jpg',FANART,'')
-    addDir('FireTv Build 02',BASEURL+'/s/relh3osiydf8h7w/build02.zip?dl=1',5,ART+'aio1.jpg',FANART,'')
+    addDir('Basic Build',BASEURL+'/s/ikh8mtb5vlsggt3/basicbuild.zip?dl=1',5,ART+'',FANART,'')
+    addDir('FireTv Build',BASEURL+'/s/k9ko4qgjr3ernc6/firetvbuild.zip?dl=1',5,ART+'',FANART,'')
+    addDir('Exodus Build',BASEURL+'/s/r62eol74k5apsi4/exodusbuild.zip?dl=1',5,ART+'',FANART,'')
     setView('movies', 'MAIN')
     
 #def MAINTENANCE():
