@@ -13,9 +13,9 @@ from addon.common.net import Net
 
 
 USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'
-addon_id = 'plugin.program.FireTvWizard'
+addon_id = 'plugin.program.FireTvWizard-master'
 ADDON = xbmcaddon.Addon(id=addon_id)
-AddonID='plugin.program.FireTvWizard'
+AddonID='plugin.program.FireTvWizard-master'
 AddonTitle="mikodi.uk"
 dialog       =  xbmcgui.Dialog()
 net = Net()
@@ -29,7 +29,7 @@ TNPATH = xbmc.translatePath('special://thumbnails');
 PATH = "mikodi.uk"         
 BASEURL = "https://www.dropbox.com"
 H = 'http://'
-EXCLUDES     = ['plugin.program.FireTvWizard','script.module.addon.common']
+EXCLUDES     = ['plugin.program.FireTvWizard-master','script.module.addon.common']
 
 def INDEX():
     addDir('Update',BASEURL,2,ART+'downloads.png',FANART,'')
