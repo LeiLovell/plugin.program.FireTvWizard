@@ -13,9 +13,9 @@ from addon.common.net import Net
 
 
 USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'
-addon_id = 'plugin.program.FireTvWizard-master'
+addon_id = 'plugin.program.miwizard-master'
 ADDON = xbmcaddon.Addon(id=addon_id)
-AddonID='plugin.program.FireTvWizard-master'
+AddonID='plugin.program.miwizard-master'
 AddonTitle="mikodi.uk"
 dialog       =  xbmcgui.Dialog()
 net = Net()
@@ -29,7 +29,7 @@ TNPATH = xbmc.translatePath('special://thumbnails');
 PATH = "mikodi.uk"         
 BASEURL = "https://www.dropbox.com"
 H = 'http://'
-EXCLUDES     = ['plugin.program.FireTvWizard-master','script.module.addon.common']
+EXCLUDES     = ['plugin.program.miwizard-master','script.module.addon.common']
 
 def INDEX():
     addDir('Update',BASEURL,2,ART+'downloads.png',FANART,'')
@@ -37,9 +37,7 @@ def INDEX():
     setView('movies', 'MAIN')
 
 def BUILDMENU():
-    addDir('Basic Build',BASEURL+'/s/ikh8mtb5vlsggt3/basicbuild.zip?dl=1',5,ART+'downloads.png',FANART,'')
-    addDir('FireTv Build',BASEURL+'/s/k9ko4qgjr3ernc6/firetvbuild.zip?dl=1',5,ART+'downloads.png',FANART,'')
-    addDir('Exodus Build',BASEURL+'/s/r62eol74k5apsi4/exodusbuild.zip?dl=1',5,ART+'downloads.png',FANART,'')
+    addDir('# BUILD NAME',BASEURL+'# BUILD / LOCATION ',5,ART+'downloads.png',FANART,'')
     setView('movies', 'MAIN')
     
 #def MAINTENANCE():
@@ -88,13 +86,13 @@ def WIZARD(name,url,description):
     downloader.download(url, lib, dp)
     addonfolder = xbmc.translatePath(os.path.join('special://','home'))
     time.sleep(2)
-    dp.update(0, "Installing FireTv Build. Please Wait")
+    dp.update(0, "Installing Build. Please Wait")
     print '======================================='
     print addonfolder
     print '======================================='
     extract.all(lib,addonfolder,dp)
     dialog = xbmcgui.Dialog()
-    dialog.ok("mikodi.uk", "To save changes you now need to force close Kodi, Press OK to force close Kodi")
+    dialog.ok("www.mikodi.uk", "To save changes you now need to force close Kodi, Press OK to force close Kodi")
     killxbmc()
 
 
@@ -122,10 +120,10 @@ def DeletePackages(url):
                     for d in dirs:
                         shutil.rmtree(os.path.join(root, d))
                     dialog = xbmcgui.Dialog()
-                    dialog.ok("mikodi.uk", "Packages Successfuly Removed", "[COLOR steelblue]Brought To You By LLovell[/COLOR]")
+                    dialog.ok("www.mikodi.uk", "Packages Successfuly Removed", "[COLOR steelblue]Brought To You By LLovell[/COLOR]")
     except: 
         dialog = xbmcgui.Dialog()
-        dialog.ok("mikodi.uk", "Sorry we were not able to remove Package Files", "[COLOR steelblue]Brought To You By LLovell[/COLOR]")
+        dialog.ok("www.mikodi.uk", "Sorry we were not able to remove Package Files", "[COLOR steelblue]Brought To You By LLovell[/COLOR]")
     
 
 
@@ -373,6 +371,8 @@ def killxbmc():
     elif myplatform == 'android': # Android  
         print "############   try android force close  #################"
         try: os.system('adb shell am force-stop org.xbmc.kodi')
+        except: pass
+        try: os.system('adb shell am force-stop com.semperpax.spmc16')
         except: pass
         try: os.system('adb shell am force-stop org.kodi')
         except: pass
