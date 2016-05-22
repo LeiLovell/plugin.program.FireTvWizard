@@ -37,9 +37,7 @@ def INDEX():
     setView('movies', 'MAIN')
 
 def BUILDMENU():
-    addDir('Basic Build',BASEURL+'/s/ikh8mtb5vlsggt3/basicbuild.zip?dl=1',5,ART+'downloads.png',FANART,'')
-    addDir('FireTv Build',BASEURL+'/s/7uyrm6kejubj6mj/firetvbuild.zip?dl=1',5,ART+'downloads.png',FANART,'')
-    addDir('Exodus Build',BASEURL+'/s/r62eol74k5apsi4/exodusbuild.zip?dl=1',5,ART+'downloads.png',FANART,'')
+    addDir('Backup Build',BASEURL+'/s/fxjcnlkkcw43v7a/backup.zip?dl=1',5,ART+'downloads.png',FANART,'')
     setView('movies', 'MAIN')
     
 #def MAINTENANCE():
