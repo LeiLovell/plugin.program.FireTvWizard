@@ -37,8 +37,7 @@ def INDEX():
     setView('movies', 'MAIN')
 
 def BUILDMENU():
-    addDir('Build 0617',BASEURL+'/s/bn53sontodmj2s4/0617.zip?dl=1',5,ART+'downloads.png',FANART,'')
-    addDir('Build 0618',BASEURL+'/s/lshfj30q39kocpy/0618.zip?dl=1',5,ART+'downloads.png',FANART,'')
+    addDir('Install UKTVNow',BASEURL+'/s/9negs2g8782nxyg/plugin.video.uktvnow-2.0.4.zip?dl=1',5,ART+'downloads.png',FANART,'')
     setView('movies', 'MAIN')
     
 #def MAINTENANCE():
