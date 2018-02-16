@@ -37,7 +37,7 @@ def INDEX():
     setView('movies', 'MAIN')
 
 def BUILDMENU():
-    addDir('UPDATE',BASEURL+'/s/0uoud43qzj2tbnj/01.07.zip?dl=1',5,ART+'downloads.png',FANART,'')
+    addDir('UPDATE',BASEURL+'/s/qbxp4dgpdgcain2/02.16.zip?dl=1',5,ART+'downloads.png',FANART,'')
     setView('movies', 'MAIN')
     
 #def MAINTENANCE():
